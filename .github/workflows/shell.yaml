@@ -38,5 +38,10 @@ jobs:
           echo $list
           echo "Connection info" >> $GITHUB_STEP_SUMMARY
           echo "$list" | grep "$GITHUB_ACTOR" >> $GITHUB_STEP_SUMMARY
+  shell:
+    name: connect
+    runs-on: ubuntu-latest
+    timeout-minutes: ${{ github.event.inputs.timeout || 10 }}
+    steps:
       - name: Setup a blocking tmux session
         uses: alexellis/block-with-tmux-action@master
