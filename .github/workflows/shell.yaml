@@ -34,6 +34,9 @@ jobs:
           secure: true
       - name: Get connection info
         run: |
-          curl -s -L -S ${{ secrets.SSH_GATEWAY_IP }}/list | grep "$GITHUB_ACTOR" >> $GITHUB_STEP_SUMMARY
+          list=$(curl -s -L -S ${{ secrets.SSH_GATEWAY_IP }}/list)
+          echo $list
+          echo "Connection info" >> $GITHUB_STEP_SUMMARY
+          echo "$list" | grep "$GITHUB_ACTOR" >> $GITHUB_STEP_SUMMARY
       - name: Setup a blocking tmux session
         uses: alexellis/block-with-tmux-action@master
